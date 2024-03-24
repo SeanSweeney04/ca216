@@ -1,0 +1,54 @@
+Introduction
+Through the use of commands, users can communicate with their operating system via the Simple Shell command-line interpreter. 
+It offers a quick and easy method for managing files, running programs, and navigating directories.
+
+Getting started
+
+All you have to do is open a terminal window on your UNIX system to begin utilizing the Simple Shell. 
+Use the supplied "make" command to compile the shell software if you haven't already.
+
+Internal commands
+-cd : change directory. Use cd <directory> to navigate to a specific directory
+-dir: list directory contents
+-pwd: print the working directory
+-echo: display a line of text. Use echo <message> to print a message to the terminal.
+-clr: clear the terminal screen. 
+-environ: print the system's environment variables
+-help: display the user manual
+-pause - pause operation of the shell until 'Enter' is pressed
+quit - quit the shell
+
+Input/Output redirection
+The shell allows you to specify the source of command input and the destination of command output by supporting input/output redirection. 
+Here are a few typical operators for redirection:
+
+-'<' : redirect input from a file.To specify a file as an input for a command, use '< file'.
+-'>' : redirect ouput to a file. To overwrite the contents of a file with command input, use '> file'.
+-'>>' : append ouput to file. To append command output to the end of a file, use '>> file'.
+For exmaple:
+ls > files.txt
+
+Backgroud execution
+allows for program background execution, so you can run commands without having to wait for them to finish. 
+Add an ampersand & at the end of the command line to execute it in the background.
+For example:
+sleep 10 & (runs the sleep command in the background for 10 seconds)
+
+Environment Concepts
+In an operating system that resembles UNIX, the term "environment" refers to the group of variables and configurations that specify the operational environment for shell sessions and applications. 
+Comprehending environment variables is essential for proficiently adjusting and personalizing the functionality of the shell and further programs.
+
+Environment Variables
+Environment variables are named variables that change dynamically and have an impact on how processes and programs behave on a system. Child processes inherit these variables, which are usually set by the shell or by system services.
+
+Typical environment factors include the following:
+
+PATH: indicates the folders that the system searches for executable files. The executable file linked to a command is found by the system by searching through the directories specified in the PATH variable when you type a command in the shell.
+HOME: Indicates the user's directory at home. Numerous programs utilize this variable to set the default location for user-specific configuration files and data storage.
+USER: Indicates the current user's username. This variable helps to identify who is using the system right now.
+
+Peer reviewed sources
+1. Tanenbaum, , A.S. Woodhull, A.S (2014). Operating Systems: Design and Implementation. Pearson Education
+2. Stevens, W.R., Rago, S.A, Fenner, B.N (2013). Advanced Programming in the Unix Environment. Addison Wesley Professional
+3. Kerrisk, M. (2010). The Linux Programming Interface. A Linux and Unix System Programming Handbook. No Starch Press
+4. Batch, M.J (1986). The Design of the Unix Operating System. Prentice Hall.

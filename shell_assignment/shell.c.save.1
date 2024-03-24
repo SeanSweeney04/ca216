@@ -1,0 +1,97 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#define MAX_BUFFER 1024                        // max line buffer
+#define MAX_ARGS 64                            // max # args
+#define SEPARATORS " \t\n"
+
+void internal_command(char ** args){
+   pid_t = child_pid = fork();
+   if (child_pid == -1){
+      perror("fork failed);
+   }
+   else{
+   if(!strcmp(args[0], "clr")){
+      system("clear");
+   }
+   else if(!strcmp(args[0], "quit")){
+      exit(0);
+   }
+   else if (!strcmp(args[0], "cd")){
+      chdir("..");
+   }
+   else if (!strcmp(args[0], "pwd")){
+      char s[100];
+      printf("%s\n", getcwd(s, 100));
+   }
+   else if(!strcmp(args[0], "dir")){
+	  system("ls -l");
+   }
+
+   else if(!strcmp(args[0], "environ")){
+	  system("env");
+   }
+
+   else if(!strcmp(args[0], "echo")){
+      printf("%s\n", args[1]);
+   }
+
+   else if(!strcmp(args[0], "help")){
+      system("man bash");
+   }
+   else if(!strcmp(args[0], "pause")){
+      printf("Press Enter to continue");
+      while(getchar() != '\n');
+
+   }
+   else{
+      while(*args){
+         fprintf(stdout, "%s", *args++);
+      }
+      fputs("\n", stdout);
+   }
+}
+
+void tokenize(char * buf, char ** args){
+   char ** arg = args;
+   *arg++ = strtok(buf , SEPARATORS);
+   while ((*arg++ = strtok(NULL,SEPARATORS)));
+   // last entry will be NULL
+}
+
+void in_out_redirection(char ** args){
+   FILE * input_file = argv[1];
+   FILE * output_file = argv[2];
+}
+
+int main(int argc, char * argv[]){
+   if (argc == 2){
+      FILE * fptr;
+      fptr  = fopen(argv[1], "rb");
+      for(int i = 0; i < sizeof(fptr); ++i){
+         char command_to_string[100];
+         fgets(command_to_string, 100, fptr);
+         system(command_to_string);
+      }
+      fclose(fptr);
+   }
+   char buf[MAX_BUFFER];  // line buffer
+   char * args[MAX_ARGS];
+   char working_dir[100];
+
+  // char * prompt = getcwd(working_dir, 100) + " ";
+   char * prompt = "==>";
+   while(!feof(stdin)){
+      fputs(prompt, stdout);
+      if(fgets(buf, MAX_BUFFER, stdin)){
+        //tokenize the input
+         tokenize(buf, args);
+      }
+      //check for commands and execute
+         if(args[0]){
+            internal_command(args);
+         }
+   }
+   return 0;
+}
